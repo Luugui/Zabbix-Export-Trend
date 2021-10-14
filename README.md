@@ -17,6 +17,10 @@ Script criado para extração de trends historicos de um host selecionado. Neste
 
 `pip install pyzabbix tqdm argparse`
 
+or
+
+`pip install -r requirements.txt`
+
 ---
 ### Exemplo
 
