@@ -5,7 +5,7 @@
 #author              : Luis Amaral
 #email               : luisguilhermester at live dot com
 #date                : 2021/10/13
-#version             : 0.1.0
+#version             : 0.1.1
 #usage               : $ python zabbix-export-trends.py -u Admin -p zabbix -s http://localhost/zabbix -n 'Zabbix Server' -f 01/01/2021 -t 02/01/2021
 #notes               : All parameters are required
 #license             : Apache-2.0
@@ -15,9 +15,12 @@
 from pyzabbix import ZabbixAPI
 from tqdm import tqdm
 from datetime import datetime
+from colorama import init, Fore
 import time, csv, os, argparse
 
 # Configurando os argumentos // Configuring the arguments
+
+init(autoreset=True)
 
 parser = argparse.ArgumentParser(description="Extract trend from select host")
 parser.add_argument("-u", "--user", required=True, help="Zabbix user")
@@ -41,13 +44,14 @@ REPORT_NAME = f'ZABBIX-{SERVIDOR}-TREND-EXPORT.csv'
 
 
 # CONECTANDO AO ZABBIX // CONNECT TO ZABBIX
+os.system('cls') if os.name == 'nt' else os.system('clear')
 app = ZabbixAPI(URL)
 if "https" in URL:
     import requests
     requests.packages.urllib3.disable_warnings()
     app.session.verify = False
 app.login(LOGIN,SENHA)
-print(f"[{datetime.now()}] Connected to Zabbix!\n")
+print(f"[{Fore.GREEN}{datetime.now()}{Fore.WHITE}] Connected to Zabbix!")
 
 LIST_HOSTS = app.host.get(output=["hostid","name"],filter={"host": SERVIDOR},limit=1)
 
@@ -95,18 +99,18 @@ def timestamp_to_date(tm):
 
 
 def main():
-    os.system('cls') if os.name == 'nt' else os.system('clear')
+    
     with open(REPORT_NAME, mode='w', newline='') as csv_file:
         trend_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         trend_writer.writerow(['HOST','DATE','METRIC','VALUE AVG'])
         for host in LIST_HOSTS:
             trend = app.trend.get(output=["itemid","clock","value_avg"], itemids=get_metrics(host['hostid']), time_from=date_to_timestamp(INICIO), time_till=date_to_timestamp(FIM))
-            for t in tqdm(trend, ascii=True, desc=f"[{datetime.now()}] Extract trends from {SERVIDOR}"):
+            for t in tqdm(trend, ascii=True, desc=f"[{Fore.GREEN}{datetime.now()}{Fore.WHITE}] Extract trends from {SERVIDOR}"):
                 item_name = app.item.get(output=["itemid","name"],itemids=t['itemid'])
                 trend_writer.writerow([host['name'],timestamp_to_date(t['clock']),item_name[0]['name'],t['value_avg']])
 
     app.user.logout()
-    print(f"[{datetime.now()}] Close connection!")
+    print(f"[{Fore.GREEN}{datetime.now()}{Fore.WHITE}] Close connection!")
 
 
 if __name__ == '__main__':
