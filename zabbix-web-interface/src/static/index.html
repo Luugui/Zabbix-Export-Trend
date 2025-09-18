@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zabbix Trend Exporter - Interface Web</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-chart-line"></i>
+                    <h1>Zabbix Trend Exporter</h1>
+                </div>
+                <p class="subtitle">Exportação de Tendências Históricas do Zabbix</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="form-container">
+                <form id="exportForm" class="export-form">
+                    <div class="form-section">
+                        <h2><i class="fas fa-server"></i> Configuração do Servidor</h2>
+                        
+                        <div class="form-group">
+                            <label for="url">URL do Zabbix</label>
+                            <input type="url" id="url" name="url" placeholder="http://localhost/zabbix" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="username">Usuário</label>
+                                <input type="text" id="username" name="username" placeholder="Admin" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" placeholder="zabbix" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="testConnection" class="btn btn-secondary">
+                                <i class="fas fa-plug"></i> Testar Conexão
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2><i class="fas fa-desktop"></i> Seleção do Host</h2>
+                        
+                        <div class="form-group">
+                            <label for="hostname">Nome do Host</label>
+                            <div class="input-with-button">
+                                <input type="text" id="hostname" name="hostname" placeholder="Zabbix Server" required>
+                                <button type="button" id="searchHosts" class="btn btn-icon" title="Buscar Hosts">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="hostsList" class="hosts-list" style="display: none;"></div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2><i class="fas fa-calendar-alt"></i> Período de Exportação</h2>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="dateFrom">Data Inicial</label>
+                                <input type="date" id="dateFrom" name="dateFrom" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dateTill">Data Final</label>
+                                <input type="date" id="dateTill" name="dateTill" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h2><i class="fas fa-chart-bar"></i> Métricas a Exportar</h2>
+                        
+                        <div class="metrics-grid">
+                            <label class="metric-checkbox">
+                                <input type="checkbox" name="metrics" value="cpu" checked>
+                                <span class="checkmark"></span>
+                                <i class="fas fa-microchip"></i>
+                                CPU
+                            </label>
+                            
+                            <label class="metric-checkbox">
+                                <input type="checkbox" name="metrics" value="memory" checked>
+                                <span class="checkmark"></span>
+                                <i class="fas fa-memory"></i>
+                                Memória
+                            </label>
+                            
+                            <label class="metric-checkbox">
+                                <input type="checkbox" name="metrics" value="disk" checked>
+                                <span class="checkmark"></span>
+                                <i class="fas fa-hdd"></i>
+                                Disco
+                            </label>
+                            
+                            <label class="metric-checkbox">
+                                <input type="checkbox" name="metrics" value="network_in" checked>
+                                <span class="checkmark"></span>
+                                <i class="fas fa-download"></i>
+                                Rede (Entrada)
+                            </label>
+                            
+                            <label class="metric-checkbox">
+                                <input type="checkbox" name="metrics" value="network_out" checked>
+                                <span class="checkmark"></span>
+                                <i class="fas fa-upload"></i>
+                                Rede (Saída)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="startExport" class="btn btn-primary">
+                            <i class="fas fa-download"></i> Iniciar Exportação
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Progress Section -->
+            <div id="progressSection" class="progress-section" style="display: none;">
+                <div class="progress-container">
+                    <h3><i class="fas fa-cog fa-spin"></i> Exportação em Andamento</h3>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                    <p id="progressMessage" class="progress-message">Iniciando...</p>
+                    <div class="progress-actions">
+                        <button id="cancelExport" class="btn btn-danger">
+                            <i class="fas fa-times"></i> Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <div class="results-container">
+                    <div id="successResult" class="result-success" style="display: none;">
+                        <h3><i class="fas fa-check-circle"></i> Exportação Concluída!</h3>
+                        <p>O arquivo CSV foi gerado com sucesso.</p>
+                        <div class="result-actions">
+                            <button id="downloadFile" class="btn btn-success">
+                                <i class="fas fa-download"></i> Baixar Arquivo
+                            </button>
+                            <button id="newExport" class="btn btn-secondary">
+                                <i class="fas fa-plus"></i> Nova Exportação
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div id="errorResult" class="result-error" style="display: none;">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Erro na Exportação</h3>
+                        <p id="errorMessage">Ocorreu um erro durante a exportação.</p>
+                        <div class="result-actions">
+                            <button id="retryExport" class="btn btn-primary">
+                                <i class="fas fa-redo"></i> Tentar Novamente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Notifications -->
+        <div id="notifications" class="notifications"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

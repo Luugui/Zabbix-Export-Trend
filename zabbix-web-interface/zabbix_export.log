@@ -1,0 +1,47 @@
+2025-09-18 12:35:49,303 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://169.254.0.21:5000
+2025-09-18 12:35:49,303 - INFO - [33mPress CTRL+C to quit[0m
+2025-09-18 12:35:49,303 - INFO -  * Restarting with stat
+2025-09-18 12:35:49,717 - WARNING -  * Debugger is active!
+2025-09-18 12:35:49,717 - INFO -  * Debugger PIN: 855-375-528
+2025-09-18 13:05:07,120 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://169.254.0.21:5000
+2025-09-18 13:05:07,121 - INFO - [33mPress CTRL+C to quit[0m
+2025-09-18 13:05:07,121 - INFO -  * Restarting with stat
+2025-09-18 13:05:07,553 - WARNING -  * Debugger is active!
+2025-09-18 13:05:07,554 - INFO -  * Debugger PIN: 355-249-604
+2025-09-18 13:05:40,669 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:40] "HEAD / HTTP/1.1" 200 -
+2025-09-18 13:05:40,710 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:40] "GET / HTTP/1.1" 200 -
+2025-09-18 13:05:40,964 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:40] "GET / HTTP/1.1" 200 -
+2025-09-18 13:05:41,011 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:41] "GET /style.css HTTP/1.1" 200 -
+2025-09-18 13:05:41,012 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:41] "GET /script.js HTTP/1.1" 200 -
+2025-09-18 13:05:50,372 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:50] "GET / HTTP/1.1" 200 -
+2025-09-18 13:05:50,888 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:50] "GET /script.js HTTP/1.1" 200 -
+2025-09-18 13:05:50,889 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:50] "GET /style.css HTTP/1.1" 200 -
+2025-09-18 13:05:51,413 - INFO - 10.9.248.1 - - [18/Sep/2025 13:05:51] "GET /favicon.ico HTTP/1.1" 200 -
+2025-09-18 13:06:09,891 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:09] "GET / HTTP/1.1" 200 -
+2025-09-18 13:06:09,961 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:09] "GET /script.js HTTP/1.1" 200 -
+2025-09-18 13:06:09,964 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:09] "GET /style.css HTTP/1.1" 200 -
+2025-09-18 13:06:24,056 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:24] "GET / HTTP/1.1" 200 -
+2025-09-18 13:06:24,167 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:24] "GET /script.js HTTP/1.1" 200 -
+2025-09-18 13:06:24,167 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:24] "GET /style.css HTTP/1.1" 200 -
+2025-09-18 13:06:24,516 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:24] "GET /favicon.ico HTTP/1.1" 200 -
+2025-09-18 13:06:51,431 - INFO - JSON-RPC Server Endpoint: https://monitor.inmetro.gov.br/zabbix/api_jsonrpc.php
+2025-09-18 13:06:56,576 - ERROR - Erro ao conectar ao Zabbix: HTTPSConnectionPool(host='monitor.inmetro.gov.br', port=443): Max retries exceeded with url: /zabbix/api_jsonrpc.php (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)')))
+2025-09-18 13:06:56,577 - INFO - 10.9.248.1 - - [18/Sep/2025 13:06:56] "[31m[1mPOST /api/zabbix/test-connection HTTP/1.1[0m" 400 -
+2025-09-18 13:07:08,357 - INFO - JSON-RPC Server Endpoint: https://monitor.inmetro.gov.br/zabbix/api_jsonrpc.php
+2025-09-18 13:07:13,363 - ERROR - Erro ao conectar ao Zabbix: HTTPSConnectionPool(host='monitor.inmetro.gov.br', port=443): Max retries exceeded with url: /zabbix/api_jsonrpc.php (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)')))
+2025-09-18 13:07:13,363 - INFO - 10.9.248.1 - - [18/Sep/2025 13:07:13] "[31m[1mPOST /api/zabbix/test-connection HTTP/1.1[0m" 400 -
+2025-09-18 13:07:19,435 - INFO - JSON-RPC Server Endpoint: https://monitor.inmetro.gov.br/api_jsonrpc.php
+2025-09-18 13:07:24,440 - ERROR - Erro ao conectar ao Zabbix: HTTPSConnectionPool(host='monitor.inmetro.gov.br', port=443): Max retries exceeded with url: /api_jsonrpc.php (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)')))
+2025-09-18 13:07:24,441 - INFO - 10.9.248.1 - - [18/Sep/2025 13:07:24] "[31m[1mPOST /api/zabbix/test-connection HTTP/1.1[0m" 400 -
+2025-09-18 13:07:33,729 - INFO - JSON-RPC Server Endpoint: https://monitor.inmetro.gov.br/api_jsonrpc.php
+2025-09-18 13:07:38,737 - ERROR - Erro ao conectar ao Zabbix: HTTPSConnectionPool(host='monitor.inmetro.gov.br', port=443): Max retries exceeded with url: /api_jsonrpc.php (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)')))
+2025-09-18 13:07:38,738 - INFO - 10.9.248.1 - - [18/Sep/2025 13:07:38] "[31m[1mPOST /api/zabbix/get-hosts HTTP/1.1[0m" 400 -
+2025-09-18 13:07:53,936 - INFO - JSON-RPC Server Endpoint: https://monitor.inmetro.gov.br/api_jsonrpc.php
+2025-09-18 13:07:58,943 - ERROR - Erro ao conectar ao Zabbix: HTTPSConnectionPool(host='monitor.inmetro.gov.br', port=443): Max retries exceeded with url: /api_jsonrpc.php (Caused by SSLError(SSLZeroReturnError(6, 'TLS/SSL connection has been closed (EOF) (_ssl.c:992)')))
+2025-09-18 13:07:58,943 - INFO - 10.9.248.1 - - [18/Sep/2025 13:07:58] "[31m[1mPOST /api/zabbix/test-connection HTTP/1.1[0m" 400 -

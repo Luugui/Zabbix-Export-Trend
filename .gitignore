@@ -1,3 +1,9 @@
 *.csv
 csv-gerado/
 ja enviados/
+
+
+*.zip
+zabbix-web-interface/venv/
+
+
